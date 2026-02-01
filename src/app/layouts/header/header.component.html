@@ -1,0 +1,86 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold" routerLink="/dashboard">
+            <i class="bi bi-hospital me-2"></i> Clinique Gaga
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
+                        <i class="bi bi-speedometer2 me-1"></i> Tableau de bord
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/creer-compte" routerLinkActive="active">
+                        <i class="bi bi-person-plus me-1"></i> Créer Compte
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/connexion" routerLinkActive="active">
+                        <i class="bi bi-box-arrow-in-right me-1"></i> Connexion
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/faire-demande" routerLinkActive="active">
+                        <i class="bi bi-calendar-event me-1"></i> Demander RDV
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/mes-rdv" routerLinkActive="active">
+                        <i class="bi bi-calendar-check me-1"></i> Mes RDV
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/dossier-medical" routerLinkActive="active">
+                        <i class="bi bi-file-medical me-1"></i> Dossier Médical
+                    </a>
+                </li>
+            </ul>
+
+
+            <div class="d-flex">
+                <div class="dropdown">
+                    <button class="btn btn-outline-light dropdown-toggle d-flex align-items-center" type="button"
+                        data-bs-toggle="dropdown">
+                        <i class="bi bi-person-circle me-2"></i>
+                        <span>{{ userName }}</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow">
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <i class="bi bi-person me-2"></i> Mon Profil
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <i class="bi bi-gear me-2"></i> Paramètres
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item" routerLink="/connexion">
+                                <i class="bi bi-box-arrow-right me-2"></i> Déconnexion
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
