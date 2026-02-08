@@ -1,0 +1,176 @@
+<!-- <input type="text" [(ngModel)]="title" class="form-control"> -->
+
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="h2 fw-bold text-dark mb-2">
+                {{title}}
+            </h1>
+            <p class="text-muted">Consultez toutes vos demandes de rendez-vous</p>
+        </div>
+    </div>
+
+
+    <div class="row mb-4 g-3">
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-0 shadow text-center h-100 rounded-0">
+                <div class="card-body">
+                    <div class="display-4 fw-bold text-warning mb-2">2</div>
+                    <div class="text-muted">En Attente</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-0 shadow text-center h-100 rounded-0">
+                <div class="card-body">
+                    <div class="display-4 fw-bold text-success mb-2">3</div>
+                    <div class="text-muted">Acceptés</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-0 shadow text-center h-100 rounded-0">
+                <div class="card-body">
+                    <div class="display-4 fw-bold text-danger mb-2">1</div>
+                    <div class="text-muted">Rejetés</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-0 shadow text-center h-100 rounded-0">
+                <div class="card-body">
+                    <div class="display-4 fw-bold text-secondary mb-2">6</div>
+                    <div class="text-muted">Total</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 class="fw-semibold mb-0">Filtrer mes demandes</h5>
+                <a routerLink="/faire-demande" class="btn btn-primary d-flex align-items-center rounded-0">
+                    <i class="bi bi-plus-circle me-2"></i> Nouvelle Demande
+                </a>
+            </div>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Statut</label>
+                    <select class="form-select" [(ngModel)]="filter.statut" id="filterStatus"
+                        (change)="onFilterStatusChange()">
+                        <option value="">Tous les statuts</option>
+                        <option value="En attente">En Attente</option>
+                        <option value="Acceptée">Accepté</option>
+                        <option value="Rejetée">Rejeté</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Spécialité</label>
+                    <select class="form-select" [(ngModel)]="filter.specialite" id="filterSpecialite"
+                        (change)="onFilterSpecialiteChange()">
+                        <option value="">Toutes les spécialités</option>
+                        <option value="Cardiologie">Cardiologie</option>
+                        <option value="Dermatologie">Dermatologie</option>
+                        <option value="Neurologie">Neurologie</option>
+                        <option value="Pédiatrie">Pédiatrie</option>
+                        <option value="Radiologie">Radiologie</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-header bg-light">
+            <h5 class="mb-0"><i class="bi bi-list-check me-2"></i> Mes Demandes de RDV</h5>
+        </div>
+        <div class="card-body p-0">
+            @if(demandesResponse!=undefined && demandesResponse.data.length > 0){
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-primary">
+                        <tr>
+                            <!-- <th>ID</th> -->
+                            <th>Date demandée</th>
+                            <th>Heure</th>
+                            <th>Spécialité</th>
+                            <th>Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for($demandes of demandesResponse?.data; track $demandes.id)
+                        {
+                        <tr>
+                            <!-- <td><strong>{{ $demandes.id }}</strong></td> -->
+                            <td>{{ $demandes.dateDemande }}</td>
+                            <td>{{ $demandes.heure }}</td>
+                            <td>{{ $demandes.specialite }}</td>
+                            <td>
+                                @if($demandes.statut === "Acceptée")
+                                {
+                                <span class="badge badge-success text-dark">{{ $demandes.statut }}</span>
+                                }@else if($demandes.statut === "Refusée")
+                                {
+                                <span class="badge badge-danger text-dark">{{ $demandes.statut }}</span>
+                                }
+                                @else if($demandes.statut === "En attente")
+                                {
+                                <span class="badge badge-warning text-dark">{{ $demandes.statut }}</span>
+                                }
+                            </td>
+                            <td>
+                                <a routerLink="/detail-rdv/DRV001" class="btn btn-outline-primary btn-sm rounded-0">
+                                    <i class="bi bi-eye me-1"></i> Détails
+                                </a>
+                            </td>
+                        </tr>
+                        }
+                        @empty{
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                <div class="alert alert-danger" role="alert">
+                                    <strong>Pas de demandes disponibles</strong>
+                                </div>
+
+
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card-footer bg-white">
+                <nav aria-label="Navigation des demandes">
+                    <ul class="pagination justify-content-center mb-0">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" aria-label="Précédent">
+                                <span aria-hidden="true">&laquo; Précédent</span>
+                            </a>
+                        </li>
+                        @for(indexPage of demandesResponse.pages; track indexPage){
+                        <li class="page-item" [class.active]="indexPage === demandesResponse.currentPage"><a
+                                class="page-link" href="#">{{indexPage}}</a></li>
+                        }
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Suivant">
+                                <span aria-hidden="true">Suivant &raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            }
+            @else{
+            <div class="alert alert-danger" role="alert">
+                <strong>Pas de demandes disponibles</strong>
+            </div>
+            }
+        </div>
+
+
+
+    </div>
+</div>
