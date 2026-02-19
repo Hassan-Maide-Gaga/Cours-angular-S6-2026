@@ -1,0 +1,202 @@
+<!-- <input type="text" [(ngModel)]="title" class="form-control"> -->
+
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="h2 fw-bold text-dark mb-2">
+                {{title}}
+            </h1>
+            <p class="text-muted">Consultez toutes vos demandes de rendez-vous</p>
+        </div>
+    </div>
+
+
+    <div class="row mb-4 g-3">
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-0 shadow text-center h-100 rounded-0">
+                <div class="card-body">
+                    <div class="display-4 fw-bold text-warning mb-2">2</div>
+                    <div class="text-muted">En Attente</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-0 shadow text-center h-100 rounded-0">
+                <div class="card-body">
+                    <div class="display-4 fw-bold text-success mb-2">3</div>
+                    <div class="text-muted">Acceptés</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-0 shadow text-center h-100 rounded-0">
+                <div class="card-body">
+                    <div class="display-4 fw-bold text-danger mb-2">1</div>
+                    <div class="text-muted">Rejetés</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-0 shadow text-center h-100 rounded-0">
+                <div class="card-body">
+                    <div class="display-4 fw-bold text-secondary mb-2">6</div>
+                    <div class="text-muted">Total</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 class="fw-semibold mb-0">Filtrer mes demandes</h5>
+                <a routerLink="/faire-demande" class="btn btn-primary d-flex align-items-center rounded-0">
+                    <i class="bi bi-plus-circle me-2"></i> Nouvelle Demande
+                </a>
+            </div>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Statut</label>
+                    <select class="form-select" [(ngModel)]="filter.statut" id="filterStatus"
+                        (change)="onFilterStatusAndSpecialiteChange()">
+                        <option value="">Tous les statuts</option>
+                        <option value="En attente">En Attente</option>
+                        <option value="Acceptée">Acceptée</option>
+                        <option value="Refusée">Refusée</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Spécialité</label>
+                    <select class="form-select" [(ngModel)]="filter.specialite" id="filterSpecialite"
+                        (change)="onFilterStatusAndSpecialiteChange()">
+                        <option value="">Toutes les spécialités</option>
+                        <option value="Cardiologie">Cardiologie</option>
+                        <option value="Dermatologie">Dermatologie</option>
+                        <option value="Neurologie">Neurologie</option>
+                        <option value="Pédiatrie">Pédiatrie</option>
+                        <option value="Radiologie">Radiologie</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-header bg-light">
+            <h5 class="mb-0"><i class="bi bi-list-check me-2"></i> Mes Demandes de RDV</h5>
+        </div>
+        <div class="card-body p-0">
+            @if(demandesResponse && demandesResponse.data && demandesResponse.data.length > 0){
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-primary">
+                        <tr>
+                            <!-- <th>ID</th> -->
+                            <th>Date demandée</th>
+                            <th>Heure</th>
+                            <th>Spécialité</th>
+                            <th>Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for(demande of demandesResponse?.data; track demande.id)
+                        {
+                        <tr>
+                            <!-- <td><strong>{{ demande.id }}</strong></td> -->
+                            <td>{{ demande.dateDemande }}</td>
+                            <td>{{ demande.heure }}</td>
+                            <td>{{ demande.specialite }}</td>
+                            <!-- <td>
+                                @if(demande.statut === "Acceptée")
+                                {
+                                <span class="badge bg-success">{{ demande.statut }}</span>
+                                }@else if(demande.statut === "Refusée")
+                                {
+                                <span class="badge bg-danger">{{ demande.statut }}</span>
+                                }
+                                @else if(demande.statut === "En attente")
+                                {
+                                <span class="badge bg-warning">{{ demande.statut }}</span>
+                                }
+                            </td> 
+                            <td>
+                                @switch(demande.statut)
+                                    {
+                                    @case("Acceptée")
+                                    {
+                                    <span class="badge bg-success">{{ demande.statut }}</span>
+                                    }@case("Refusée")
+                                    {
+                                    <span class="badge bg-danger">{{ demande.statut }}</span>
+                                    }
+                                    @case("En attente")
+                                    {
+                                    <span class="badge bg-warning">{{ demande.statut }}</span>
+                                    }
+                                    @default{
+                                    <span class="badge bg-secondary">Inconnu</span>
+                                    }
+                                }
+                            </td> -->
+                            <td [ngSwitch]="demande.statut">
+                                <span *ngSwitchCase="'Acceptée'" class="badge bg-success">Acceptée</span>
+                                <span *ngSwitchCase="'En attente'" class="badge bg-warning">En attente</span>
+                                <span *ngSwitchCase="'Refusée'" class="badge bg-danger">Refusée</span>
+                                <span *ngSwitchDefault class="badge bg-secondary">Inconnu</span>
+                            </td>
+
+                            <td>
+                                <a routerLink="/detail-rdv/DRV001" class="btn btn-outline-primary btn-sm rounded-0">
+                                    <i class="bi bi-eye me-1"></i> Détails
+                                </a>
+                            </td>
+                        </tr>
+                        }
+                        @empty{
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                <div class="alert alert-danger" role="alert">
+                                    <strong>Pas de demandes disponibles</strong>
+                                </div>
+
+
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card-footer bg-white">
+                <nav aria-label="Navigation des demandes">
+                    <ul class="pagination justify-content-center mb-0">
+                        <li class="page-item" [class.disabled]="inactivePrecedent">
+                            <a class="page-link" (click)="onPageChange(demandesResponse.currentPage - 1)" aria-label="Précédent">
+                                <span aria-hidden="true">&laquo; Précédent</span>
+                            </a>
+                        </li>
+                        @for(indexPage of demandesResponse.pages; track indexPage){
+                        <li class="page-item" [class.active]="indexPage === demandesResponse.currentPage"><a
+                                class="page-link" (click)="onPageChange(indexPage)">{{indexPage}}</a></li>
+                        }
+                        <li class="page-item" [class.disabled]="inactiveSuivant">
+                            <a class="page-link" (click)="onPageChange(demandesResponse.currentPage + 1)" aria-label="Suivant">
+                                <span aria-hidden="true">Suivant &raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            }
+            @else{
+            <div class="alert alert-danger" role="alert">
+                <strong>Pas de demandes disponibles</strong>
+            </div>
+            }
+        </div>
+
+
+
+    </div>
+</div>
