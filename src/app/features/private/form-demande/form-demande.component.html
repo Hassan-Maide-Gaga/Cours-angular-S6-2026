@@ -1,0 +1,78 @@
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="text-center mb-5">
+            <h1 class="h2 fw-bold text-dark mb-3">Faire une Demande de Rendez-vous</h1>
+            <p class="text-muted">Remplissez le formulaire pour demander un rendez-vous médical</p>
+        </div>
+
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4 p-md-5">
+                <h2 class="h4 fw-bold text-center mb-4">Nouvelle Demande de RDV</h2>
+
+                <form action="#" method="POST">
+                    <div class="row g-3">
+                        <div class="col-md-6 mb-4">
+                            <label for="type" class="form-label fw-semibold">Type de Rendez-vous *</label>
+                            <select id="type" name="type" class="form-select" required>
+                                <option value=""> Sélectionnez un type </option>
+                                <option value="CONSULTATION">Consultation</option>
+                                <option value="PRESTATION">Prestation</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <label for="specialite" class="form-label fw-semibold">Spécialité *</label>
+                            <select id="specialite" name="specialite" class="form-select" required>
+                                <option value=""> Sélectionnez une spécialité </option>
+                                <option value="CARDIOLOGIE">Cardiologie</option>
+                                <option value="GENERALISTE">Médecine Générale</option>
+                                <option value="DENTISTE">Dentiste</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12 mb-4" id="prestation-group">
+                            <label for="prestation" class="form-label fw-semibold">Type de Prestation</label>
+                            <select id="prestation" name="prestation" class="form-select">
+                                <option value="">Sélectionnez une prestation </option>
+                                <option value="RADIO">Radio</option>
+                                <option value="ANALYSE">Analyse</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <label for="date" class="form-label fw-semibold">Date souhaitée *</label>
+                            <input type="date" id="date" name="date" class="form-control" required>
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <label for="heure" class="form-label fw-semibold">Heure souhaitée *</label>
+                            <input type="time" id="heure" name="heure" class="form-control" required>
+                        </div>
+
+                        <div class="col-12 mb-4">
+                            <label for="motif" class="form-label fw-semibold">Motif de la consultation</label>
+                            <textarea id="motif" name="motif" class="form-control" rows="4"
+                                placeholder="Décrivez brièvement la raison de votre demande de rendez-vous"></textarea>
+                        </div>
+
+                        <div class="col-12 mb-4">
+                            <label for="urgence" class="form-label fw-semibold">Niveau d'urgence</label>
+                            <select id="urgence" name="urgence" class="form-select">
+                                <option value="normal">Normal</option>
+                                <option value="urgent">Urgent</option>
+                                <option value="tres_urgent">Très Urgent</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="d-flex gap-3 mt-4 pt-4 border-top">
+                                <button type="submit" class="btn btn-primary flex-grow-1 rounded-0 ">Envoyer la Demande</button>
+                                <button type="reset" class="btn btn-outline-primary rounded-0">Réinitialiser</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
