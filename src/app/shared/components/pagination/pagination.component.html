@@ -1,0 +1,18 @@
+<nav aria-label="Navigation des demandes">
+    <ul class="pagination justify-content-center mb-0">
+        <li class="page-item" [class.disabled]="inactivePrecedent">
+            <a class="page-link" (click)="onPageChange(currentPage - 1)" aria-label="Précédent">
+                <span aria-hidden="true">&laquo; Précédent</span>
+            </a>
+        </li>
+        @for(indexPage of pages; track indexPage){
+        <li class="page-item" [class.active]="indexPage === currentPage"><a class="page-link"
+                (click)="onPageChange(indexPage)">{{indexPage}}</a></li>
+        }
+        <li class="page-item" [class.disabled]="inactiveSuivant">
+            <a class="page-link" (click)="onPageChange(currentPage + 1)" aria-label="Suivant">
+                <span aria-hidden="true">Suivant &raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>

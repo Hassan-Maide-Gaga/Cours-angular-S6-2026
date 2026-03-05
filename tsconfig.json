@@ -1,0 +1,66 @@
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist/out-tsc",
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "bundler",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "paths": {
+      "@mocks": [
+        "./src/app/mocks"
+      ],
+      "@mocks/*": [
+        "./src/app/mocks/*"
+      ],
+      "@core/models": [
+        "./src/app/core/models"
+      ],
+      "@core/models/*": [
+        "./src/app/core/models/*"
+      ],
+      "@core/services": [
+        "./src/app/core/services"
+      ],
+      "@core/services/interfaces": [
+        "./src/app/core/services/interfaces"
+      ],
+      "@private/demande/resolver": [
+        "./src/app/features/private/demande-rdv/resolver"
+      ],
+      "@private/demande/services": [
+        "./src/app/features/private/demande-rdv/services"
+      ],
+      "@private/demande/services/interfaces": [
+        "./src/app/features/private/demande-rdv/services/interfaces"
+      ],
+      "@private/models": [
+        "./src/app/features/private/models"
+      ],
+      "@shared/components": [
+        "./src/app/shared/components"
+      ],
+      "@environments": [
+        "./src/environments"
+      ],
+    }
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}
